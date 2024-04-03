@@ -23,9 +23,11 @@ public class WhenWorkingWithJavaList {
         // When using Arrays.asList the variable will be static and cannot modified
         List<String> names = Arrays.asList("joe", "sally", "pete");
         List<Integer> ages = Arrays.asList(10,30,50);
+        List<Number> favoriteNumbers = Arrays.asList(10,30,50,10000000000L,3.1419);
 
         assertThat(names).contains("joe","pete","sally");
         assertThat(ages).contains(10,30,50);
+        assertThat(favoriteNumbers).contains(10,30,50,10000000000L,3.1419);
 
     }
 
@@ -78,5 +80,40 @@ public class WhenWorkingWithJavaList {
         Set<String> uniqueNames = new HashSet<>(names);
 
         assertThat(uniqueNames).contains("sally", "pete","joe","alpher");
+    }
+
+    @Test
+    public void sortingAList(){
+        List<String> names = Arrays.asList("joe", "sally", "pete","sally","paul");
+
+        Collections.sort(names);
+        assertThat(names).containsExactly("joe", "paul","pete","sally","sally");
+    }
+
+    @Test
+    public void findingMaxAndMin(){
+        List<Integer> ages = Arrays.asList(10,3,30,50,1,20,15);
+
+        assertThat(Collections.max(ages)).isEqualTo(50);
+        assertThat(Collections.min(ages)).isEqualTo(1);
+    }
+
+    @Test
+    public void combiningList(){
+        List<String> names = new ArrayList<>();
+        names.add("joe");
+        names.add("sally");
+        names.add("pete");
+
+        List<String> moreNames = new ArrayList<>();
+        names.add("lisa");
+        names.add("kerry");
+        names.add("paul");
+
+        names.addAll(moreNames);
+
+        assertThat(names).contains("joe","pete","sally","lisa","kerry","paul");
+        names.removeAll(moreNames);
+        assertThat(names).contains("joe","pete","sally");
     }
 }

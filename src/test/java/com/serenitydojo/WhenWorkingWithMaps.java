@@ -28,6 +28,7 @@ public class WhenWorkingWithMaps {
         int numberOfRedBalls2 = numberOfBallsByColor.get("blue");
         System.out.println("There are "+numberOfRedBalls2+" blue balls");
 
+
         Map<String, Integer> moreColors = new HashMap<>();
         moreColors.put("yellow",10);
         moreColors.putAll(numberOfBallsByColor);

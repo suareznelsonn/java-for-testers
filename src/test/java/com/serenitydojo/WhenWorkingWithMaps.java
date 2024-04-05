@@ -51,4 +51,35 @@ public class WhenWorkingWithMaps {
         int numberOfRedBalls5 = moreColors.getOrDefault("purple",0);
         System.out.println("There are "+numberOfRedBalls5+" purple balls");
     }
+
+    @Test
+    public void iteratingOverMapKey(){
+        Map<String, Integer> numberOfBallsByColor = Map.of("red",3,"green",6,"blue",5);
+        Map<String, Integer> modifiableMap = new HashMap<>();
+        modifiableMap.putAll(numberOfBallsByColor);
+
+        /*
+        System.out.println("Keys = "+numberOfBallsByColor.keySet());
+
+        // Iterate over Map
+        for(String key : numberOfBallsByColor.keySet()){
+            Integer numberOfTennisBall = numberOfBallsByColor.get(key);
+            System.out.println(key+" => "+numberOfTennisBall);
+        }*/
+
+        printMap(numberOfBallsByColor);
+
+        modifiableMap.remove("red");
+        printMap(modifiableMap);
+
+        modifiableMap.clear();
+        printMap(modifiableMap);
+
+    }
+
+    private static void printMap(Map<String, Integer> numberOfBallsByColor) {
+        for(Map.Entry<String, Integer> entry : numberOfBallsByColor.entrySet()){
+            System.out.println(entry.getKey()+" => "+entry.getValue());
+        }
+    }
 }

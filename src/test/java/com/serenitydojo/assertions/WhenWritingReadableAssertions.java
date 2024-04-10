@@ -1,5 +1,6 @@
 package com.serenitydojo.assertions;
 
+import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Percentage;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ public class WhenWritingReadableAssertions {
         int sum = a + b + c;
 
         // Check that the sum is 35
+        Assertions.assertThat(sum).isEqualTo(35);
     }
 
     @Test

@@ -29,4 +29,5 @@ public class WordCounter {
             throw new FileNoHasWordException("Not word in not existing file "+fileName);
         }
     }
+
 }

@@ -54,6 +54,7 @@ public class PersonTest {
     //        }
     //    };
 
+
         // Replace this expression by constant LIKE_RED
     //   PersonChecker likeRed = person -> (person.getFavouriteColor().equals("Red"));
 

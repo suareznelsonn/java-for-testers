@@ -3,8 +3,12 @@ package com.serenitydojo.people;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,8 +22,10 @@ public class PersonTest {
     Person tim = new Person("Tim", MALE, 10, "Green");
     Person susan = new Person("Susam", FEMALE, 50, "Yellow");
     Person fred = new Person("Fred", FEMALE, 20, "Blue");
+    Person sarah = new Person("Sarah", FEMALE, 34, "Orange");
+    Person paul = new Person("Paul", MALE, 40, "Cyan");
 
-    List<Person> allThePeople = Arrays.asList(sam, bill, tim, susan,fred);
+    List<Person> allThePeople = Arrays.asList(sam, bill, tim, susan,fred,sarah,paul);
 
     //PersonChecker LIKE_BLUE = person -> (person.getFavouriteColor().equals("Blue"));
     //PersonChecker LIKE_RED = person -> (person.getFavouriteColor().equals("Red"));
@@ -75,5 +81,49 @@ public class PersonTest {
         assertThat(matchingPeople).contains(sam,fred);
     }
 
+    @Test
+    public void peopleCanEarnPoints (){
+        allThePeople.parallelStream()
+                .peek(person -> System.out.println("Points for "+person.getName()+" are "+person.getPoints()))
+                .peek(person -> person.earnPoints(100))
+                .forEach(person -> System.out.println("Updated Points for "+person.getName()+" are "+person.getPoints()));
+
+//        allThePeople.parallelStream().forEach(
+//                person -> {
+//                    person.earnPoints(100);
+//                    System.out.println("Points for "+person.getName()+" are "+person.getPoints());
+//                }
+//        );
+
+//        allThePeople.forEach(
+//                person -> System.out.println("Points for "+person.getName()+" are "+person.getPoints())
+//        );
+    }
+
+    @Test
+    public void getTheListOfColors (){
+//        List<String > allTheColors = allThePeople.stream()
+//                .map(person -> person.getFavouriteColor())
+//                .collect(Collectors.toList());
+//        System.out.println(allTheColors);
+
+        List<String > allTheColors = allThePeople.stream()
+                .map(Person::getFavouriteColor)
+                .sorted()
+                .sorted(Comparator.reverseOrder())
+                .sorted(Comparator.comparing(color -> color.length()))
+                .distinct()
+                .collect(Collectors.toList());
+        System.out.println(allTheColors);
+
+        OptionalInt minNumberOfLetters = allThePeople.stream()
+                .map(Person::getFavouriteColor)
+                .filter(color -> color.equals("Orange"))
+                .sorted()
+                .distinct()
+                .mapToInt(color -> color.length())
+                .min();
+        System.out.println(minNumberOfLetters);
+    }
 
 }

@@ -5,6 +5,7 @@ public class Person {
 
     String name;
     Gender gender;
+    int points;
 
     int age;
     String favouriteColor;
@@ -14,6 +15,7 @@ public class Person {
         this.gender = gender;
         this.age = age;
         this.favouriteColor = favouriteColor;
+        this.points = 0;
     }
 
     public String getName() {
@@ -32,8 +34,17 @@ public class Person {
         return favouriteColor;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     @Override
     public String toString (){
         return name;
+    }
+
+    public void earnPoints(int earnedPoints){
+        System.out.println(getName()+" has just earned "+earnedPoints);
+        points =+ earnedPoints;
     }
 }

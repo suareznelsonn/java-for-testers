@@ -1,6 +1,6 @@
 package com.serenitydojo.enums;
 
-public enum Level {
+public enum Level implements ComparableByHeight {
     HIGH(3), MEDIUM(2), LOW(1);
 
     private final int levelCode;
